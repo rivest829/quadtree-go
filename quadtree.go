@@ -18,6 +18,7 @@ type Quadtree interface {
 	Insert(r Rect)
 	Retrieve(r Rect) []Rect
 	Clear()
+	PrintAll() string
 }
 
 type quadtreeNode struct {
