@@ -130,3 +130,24 @@ func (q *quadtreeNode) Clear() {
 
 	q.Nodes = make([]Quadtree, 0)
 }
+
+func (q *quadtreeNode) PrintAll() string {
+	if len(q.Objects) == 0 && len(q.Nodes) == 0 {
+		return ""
+	}
+	log := ""
+	for i := uint8(0); i < q.Level; i++ {
+		log += "   "
+	}
+	log += "==="
+	log += fmt.Sprintf(" %.3f:%.3f ", q.Bounds.Width, q.Bounds.Height)
+	for _, obj := range q.Objects {
+		log += obj.Owner().Id() + " / "
+	}
+	log += "\n"
+	for _, node := range q.Nodes {
+		log += node.PrintAll()
+	}
+	return log
+}
+
